@@ -33,9 +33,9 @@ public class ReadFileController {
     @PostMapping
     public ResponseEntity readFile(@RequestParam("file") MultipartFile file) {
 
-        // Check if the file is empty
-        if (file.isEmpty()) {
-            return new ResponseEntity<>("File is empty", HttpStatus.BAD_REQUEST);
+        // Check if the file is empty or extension not txt
+        if (file.isEmpty() || !file.getOriginalFilename().split("\\.")[1].equalsIgnoreCase("txt")) {
+            return new ResponseEntity<>("Please upload file with extension .txt", HttpStatus.BAD_REQUEST);
         }
 
         String bniTitle = "";
